@@ -340,8 +340,4 @@ ASALocalRun/
 # BeatPulse healthcheck temp database 
 healthchecksdb
 
-*.eot binary
-*.ttf binary
-*.woff binary
-*.woff2 binary
 /wwwroot/fontawesome/
