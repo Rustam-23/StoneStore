@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using StoneStore.Models;
 
 namespace StoneStore.Data
 {
-    public class StoneDbContext : DbContext
+    public class StoneDbContext : IdentityDbContext
     {
         public StoneDbContext(DbContextOptions<StoneDbContext> options) : base(options)
         {
@@ -13,5 +14,7 @@ namespace StoneStore.Data
         public DbSet<Category> Category { get; set; }
         public DbSet<ApplicationType> ApplicationType { get; set; }
         public DbSet<Product> Product { get; set; }
+
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
     }
 }

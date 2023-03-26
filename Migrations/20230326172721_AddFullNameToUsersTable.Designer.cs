@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using StoneStore.Data;
@@ -9,9 +10,10 @@ using StoneStore.Data;
 namespace StoneStore.Migrations
 {
     [DbContext(typeof(StoneDbContext))]
-    partial class StoneDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230326172721_AddFullNameToUsersTable")]
+    partial class AddFullNameToUsersTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
