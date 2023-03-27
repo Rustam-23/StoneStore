@@ -30,7 +30,9 @@ namespace StoneStore
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),
                     builder => { builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null); }
                 ));
-            services.AddDefaultIdentity<IdentityUser>()
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddDefaultTokenProviders()
+                .AddDefaultUI()
                 .AddEntityFrameworkStores<StoneDbContext>();
         services.AddControllersWithViews();
         services.AddHttpContextAccessor();
