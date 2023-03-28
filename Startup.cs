@@ -34,7 +34,7 @@ namespace StoneStore
                 .AddDefaultTokenProviders()
                 .AddDefaultUI()
                 .AddEntityFrameworkStores<StoneDbContext>();
-        services.AddControllersWithViews();
+        services.AddControllersWithViews().AddRazorRuntimeCompilation();
         services.AddHttpContextAccessor();
         services.AddSession(Options =>
         {
