@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StoneStore.Data;
+using StoneStore.Utility.EmailService;
 
 namespace StoneStore
 {
@@ -42,8 +44,12 @@ namespace StoneStore
             Options.Cookie.HttpOnly = true;
             Options.Cookie.IsEssential = true;
         });
+        var emailConfig = Configuration
+            .GetSection("EmailConfiguration")
+            .Get<EmailConfiguration>();
+        services.AddSingleton(emailConfig);
+        services.AddScoped<IEmailSender, EmailSender>();
         services.AddSwaggerGen();
-        
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
