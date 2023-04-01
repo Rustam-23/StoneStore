@@ -32,6 +32,11 @@ namespace StoneStore
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),
                     builder => { builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null); }
                 ));
+            var emailConfig = Configuration
+                .GetSection("EmailConfiguration")
+                .Get<EmailConfiguration>();
+            services.AddSingleton(emailConfig);
+            services.AddScoped<IEmailSender, EmailSender>();
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddDefaultTokenProviders()
                 .AddDefaultUI()
@@ -44,11 +49,6 @@ namespace StoneStore
             Options.Cookie.HttpOnly = true;
             Options.Cookie.IsEssential = true;
         });
-        var emailConfig = Configuration
-            .GetSection("EmailConfiguration")
-            .Get<EmailConfiguration>();
-        services.AddSingleton(emailConfig);
-        services.AddScoped<IEmailSender, EmailSender>();
         services.AddSwaggerGen();
         }
 

@@ -1,7 +1,9 @@
-﻿namespace StoneStore.Utility.EmailService
+﻿using System.Threading.Tasks;
+
+namespace StoneStore.Utility.EmailService
 {
     public interface IEmailSender
     {
-        void SendEMail(Message message);
+        Task SendEmailAsync(Message message);
     }
 }

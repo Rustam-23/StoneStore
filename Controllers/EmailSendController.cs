@@ -1,24 +1,25 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using StoneStore.Utility.EmailService;
 
 namespace StoneStore.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class EmailSendController : Controller
     {
-        private readonly EmailSender _emailSender;
+        private readonly IEmailSender _emailSender;
 
-        public EmailSendController(EmailSender emailSender)
+        public EmailSendController(IEmailSender emailSender)
         {
             _emailSender = emailSender;
         }
 
         [HttpGet]
-        public IActionResult SendEmail()
+        public async Task SendEmail()
         {
-            var message = new Message(new string[] { "codemazetest@mailinator.com" }, "Test email async", "This is the content from our async email.", null);
-            _emailSender.SendEMail(message);
-            
-            return Ok();
+            var message = new Message(new string[] { "@mail.ru" }, "Test email async", "This is the content from our async email.", "12345678");
+            await _emailSender.SendEmailAsync(message);
         }
     }
 }
